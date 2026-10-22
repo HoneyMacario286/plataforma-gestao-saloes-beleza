@@ -1,0 +1,101 @@
+digraph PlataformaSaloes {
+  graph [rankdir=LR, bgcolor="white", pad="0.28", nodesep="0.34", ranksep="0.75", splines=polyline,
+         fontname="DejaVu Sans", fontsize=22, labelloc="t",
+         label="DIAGRAMA ENTIDADE-RELACIONAMENTO\nPlataforma de Gestao de Saloes de Beleza"];
+  node [shape=plain, fontname="DejaVu Sans", fontsize=10];
+  edge [dir=none, color="#61758A", penwidth=1.25, fontname="DejaVu Sans", fontsize=9, fontcolor="#26384A"];
+
+  Salao [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#16324F"><FONT COLOR="white"><B>SALAO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_salao</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">nome</TD></TR><TR><TD></TD><TD ALIGN="LEFT">cidade, bairro</TD></TR><TR><TD></TD><TD ALIGN="LEFT">telefone, email</TD></TR><TR><TD></TD><TD ALIGN="LEFT">estado</TD></TR>
+    </TABLE>>];
+  Cliente [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#16324F"><FONT COLOR="white"><B>CLIENTE</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_cliente</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">nome_completo</TD></TR><TR><TD></TD><TD ALIGN="LEFT">telefone</TD></TR><TR><TD></TD><TD ALIGN="LEFT">email</TD></TR>
+    </TABLE>>];
+  Utilizador [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>UTILIZADOR</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_utilizador</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_salao</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">nome_completo</TD></TR><TR><TD></TD><TD ALIGN="LEFT">email, perfil, estado</TD></TR>
+    </TABLE>>];
+  Funcionario [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>FUNCIONARIO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_funcionario</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_salao</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">nome_completo</TD></TR><TR><TD></TD><TD ALIGN="LEFT">telefone, especialidade</TD></TR>
+    </TABLE>>];
+  Procedimento [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>PROCEDIMENTO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_procedimento</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_salao</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">nome, descricao</TD></TR><TR><TD></TD><TD ALIGN="LEFT">preco, duracao_minutos</TD></TR>
+    </TABLE>>];
+  Produto [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>PRODUTO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_produto</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_salao</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">nome, categoria</TD></TR><TR><TD></TD><TD ALIGN="LEFT">quantidade, stock_minimo</TD></TR>
+    </TABLE>>];
+  Marcacao [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>MARCACAO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_marcacao</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_salao, id_cliente</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_procedimento, id_funcionario</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">data_hora, estado</TD></TR>
+    </TABLE>>];
+  HorarioFuncionario [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>HORARIOFUNCIONARIO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_horario</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_funcionario</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">dia_semana</TD></TR><TR><TD></TD><TD ALIGN="LEFT">hora_inicio, hora_fim</TD></TR><TR><TD></TD><TD ALIGN="LEFT">tipo_dia</TD></TR>
+    </TABLE>>];
+  MovimentoStock [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>MOVIMENTOSTOCK</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_movimento</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_produto</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">tipo, quantidade</TD></TR><TR><TD></TD><TD ALIGN="LEFT">data_movimento, motivo</TD></TR>
+    </TABLE>>];
+  Atendimento [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>ATENDIMENTO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_atendimento</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_salao, id_cliente</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_funcionario, id_procedimento</TD></TR>
+      <TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_marcacao (opcional)</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">data_hora, valor_pago, tipo</TD></TR>
+    </TABLE>>];
+  HistoricoMarcacao [label=<
+    <TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5">
+      <TR><TD COLSPAN="2" BGCOLOR="#2F6690"><FONT COLOR="white"><B>HISTORICOMARCACAO</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><B>PK</B></TD><TD ALIGN="LEFT">id_historico</TD></TR><TR><TD ALIGN="LEFT"><B>FK</B></TD><TD ALIGN="LEFT">id_marcacao</TD></TR>
+      <TR><TD></TD><TD ALIGN="LEFT">estado_anterior, estado_novo</TD></TR><TR><TD></TD><TD ALIGN="LEFT">data_alteracao</TD></TR>
+    </TABLE>>];
+
+  {rank=same; Salao; Cliente;}
+  {rank=same; Utilizador; Funcionario; Procedimento; Produto;}
+  {rank=same; HorarioFuncionario; Marcacao; MovimentoStock; Atendimento;}
+  {rank=same; HistoricoMarcacao;}
+
+  Salao -> Utilizador [label="1:N"];
+  Salao -> Funcionario [label="1:N"];
+  Salao -> Procedimento [label="1:N"];
+  Salao -> Produto [label="1:N"];
+  Salao -> Marcacao [label="1:N"];
+  Salao -> Atendimento [label="1:N"];
+  Cliente -> Marcacao [label="1:N"];
+  Cliente -> Atendimento [label="1:N"];
+  Funcionario -> Marcacao [label="1:N"];
+  Funcionario -> HorarioFuncionario [label="1:N"];
+  Funcionario -> Atendimento [label="1:N"];
+  Procedimento -> Marcacao [label="1:N"];
+  Procedimento -> Atendimento [label="1:N"];
+  Produto -> MovimentoStock [label="1:N"];
+  Marcacao -> HistoricoMarcacao [label="1:N"];
+  Marcacao -> Atendimento [label="0:N; FK opcional em Atendimento"];
+}
